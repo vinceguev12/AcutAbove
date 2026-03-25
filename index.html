@@ -103,33 +103,46 @@ Thank you for what you do! "</p>
 </body>
 </html>
 
-<!-- JavaScript for Scroll Spying -->
+<!-- JavaScript for Scroll Spying & Clean Navigation -->
     <script>
-        // Grab all sections that have an ID (About, Services, Reviews)
+        // 1. Force the page to load at the very top on a refresh
+        if (history.scrollRestoration) {
+            history.scrollRestoration = "manual";
+        }
+        window.scrollTo(0, 0);
+
         const sections = document.querySelectorAll("section[id]");
-        // Grab all the navigation links
         const navLinks = document.querySelectorAll("nav a");
 
-        // NEW: Force the link to lose its "hover" state after clicking
+        // 2. Handle clicks smoothly without changing the URL
         navLinks.forEach(link => {
-            link.addEventListener("click", function() {
-                this.blur();
+            link.addEventListener("click", function(e) {
+                const targetId = this.getAttribute("href");
+                
+                // Only intercept internal links that start with '#'
+                if (targetId.startsWith("#")) {
+                    e.preventDefault(); // Stops the #hash from adding to the URL
+                    this.blur();        // Kills the sticky hover ghost
+                    
+                    // Smoothly scroll to that section
+                    document.querySelector(targetId).scrollIntoView({
+                        behavior: "smooth"
+                    });
+                }
             });
         });
 
+        // 3. The Scroll Spy (Highlighting the links as you scroll)
         window.addEventListener("scroll", () => {
             let current = "";
             
-            // Figure out which section we are currently hovering over
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                // The 150px offset accounts for your sticky header!
                 if (window.scrollY >= (sectionTop - 150)) {
                     current = section.getAttribute("id");
                 }
             });
 
-            // Remove the 'active' class from all links, then add it to the current one
             navLinks.forEach(link => {
                 link.classList.remove("active");
                 if (current && link.getAttribute("href").includes(current)) {
