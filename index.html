@@ -92,7 +92,8 @@ Thank you for what you do! "</p>
     <footer>
         <div class="footer-info">
             <h3>A CUT ABOVE BARBERSHOP</h3>
-            <p> 5033 Warren St, Skokie, IL 60077 (By Appointment Only)</p>
+            <p> 5033 Warren St, Skokie, IL 60077 </p>
+            <p> (By Appointment Only) </p>
             <p>Phone: (847) 677-9060</p>
         </div>
         <a href="sms:+18476779060?body=Hi! I'd like to book a haircut appointment." class="btn-primary">Text to Book</a>
@@ -100,3 +101,39 @@ Thank you for what you do! "</p>
 
 </body>
 </html>
+
+<!-- JavaScript for Scroll Spying -->
+    <script>
+        // Grab all sections that have an ID (About, Services, Reviews)
+        const sections = document.querySelectorAll("section[id]");
+        // Grab all the navigation links
+        const navLinks = document.querySelectorAll("nav a");
+
+        // NEW: Force the link to lose its "hover" state after clicking
+        navLinks.forEach(link => {
+            link.addEventListener("click", function() {
+                this.blur();
+            });
+        });
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            
+            // Figure out which section we are currently hovering over
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // The 150px offset accounts for your sticky header!
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            // Remove the 'active' class from all links, then add it to the current one
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (current && link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>

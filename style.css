@@ -57,8 +57,14 @@ nav a {
     transition: color 0.3s ease;
 }
 
-nav a:hover {
+
+
+/* This is the highlighted state for the scroll spy */
+nav a.active {
     color: var(--accent);
+    font-weight: 700;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 5px;
 }
 
 /* Buttons */
@@ -108,6 +114,7 @@ nav a:hover {
 section {
     padding: 80px 5%;
     text-align: center;
+    scroll-margin-top: 140px; 
 }
 
 section h2 {
@@ -256,3 +263,4 @@ footer {
         max-width: 300px;
     }
 }
+
