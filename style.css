@@ -196,3 +196,63 @@ footer {
     color: var(--accent);
     margin-bottom: 10px;
 }
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    /* Stack the header neatly */
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px 5%;
+        text-align: center;
+    }
+    
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Shrink the massive hero text */
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+
+    /* Tighten up the space between sections */
+    section {
+        padding: 50px 5%;
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+
+    /* Make service and review cards take up the full screen width */
+    .service-item, .review-card {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Stack the footer elements */
+    footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    /* Make the booking button full width for easy tapping */
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+    }
+}
